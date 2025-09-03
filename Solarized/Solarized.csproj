@@ -61,16 +61,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.cs" />
     <Compile Include="GamePanel.cs" />
+    <Compile Include="Level\Buttons\BaseButton.cs" />
+    <Compile Include="Level\GameGraphics.cs" />
+    <Compile Include="Level\StartupScreen.cs" />
+    <Compile Include="Level\ResourceLocation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Level\GuisElements.cs" />
+    <Compile Include="Level\MainMenu.cs" />
+    <Compile Include="Level\AbstractScreen.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\Font\" />
+    <Folder Include="Effects\" />
+    <Folder Include="NPCs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

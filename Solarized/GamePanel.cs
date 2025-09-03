@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Solarized.Level;
+using Solarized.Screen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,13 +31,32 @@ namespace Solarized
         public int MouseX;
         public int MouseY;
         public int gameTick;
-        public Random random = new Random();
-
+        public TimeSpan Time = new TimeSpan();
+        public Random random;
         private GraphicsDeviceManager deviceManager;
         private SpriteBatch spriteBatch;
+        protected SpriteFont GameFont;
+        protected static ContentManager contentManager;
+        protected static AbstractScreen currentScreen;
+        private GameGraphics GameGraphics;
+        public static ContentManager ContentManager
+        {
+            get { return contentManager; }
+        }
+        public static AbstractScreen CurrentScreen
+        {
+            get { return currentScreen; }
+        }
+        private static GamePanel _instance;
+        public static GamePanel Instance
+        {
+            get { return new  GamePanel(); }
+        }
+        //
 
         public GamePanel()
         {
+            this.random = new Random((int) this.Time.TotalSeconds);
             this.deviceManager = new GraphicsDeviceManager(this);
             this.deviceManager.PreferredBackBufferWidth = ScreenWitdh;
             this.deviceManager.PreferredBackBufferHeight = ScreenHeight;
@@ -43,9 +65,23 @@ namespace Solarized
             this.Content.RootDirectory = "Content";
             this.IsMouseVisible = true;
         }
+        protected override void Initialize()
+        {
+            base.Initialize();
+            this.GameGraphics = new GameGraphics(this);
+            this.SetScreen(new StartupScreen());
+        }
         protected override void LoadContent()
         {
+            base.LoadContent();
+            contentManager = new ContentManager(Services);
             this.spriteBatch = new SpriteBatch(GraphicsDevice);
+            this.GameFont = GamePanel.ContentManager.Load<SpriteFont>("Fonts/00");
+        }
+
+        public void SetScreen(AbstractScreen screen)
+        {
+            currentScreen = screen;
         }
 
         protected override void Update(GameTime gameTime)
@@ -54,6 +90,7 @@ namespace Solarized
             {
                 Exit();
             }
+            CurrentScreen?.Tick((float) gameTime.ElapsedGameTime.TotalSeconds);
             base.Update(gameTime);
         }
 
@@ -61,6 +98,8 @@ namespace Solarized
         {
             this.spriteBatch.Begin();
             //
+            this.GameGraphics.Render(this.spriteBatch, gameTime.ElapsedGameTime.TotalSeconds);
+            CurrentScreen?.Render(this.spriteBatch);
             //
             this.spriteBatch.End();
 
