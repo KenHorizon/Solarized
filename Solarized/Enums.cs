@@ -31,4 +31,9 @@ namespace Solarized.Content
         Centered,
         Left
     }
+    public enum FontStyle
+    {
+        Default,
+        Shadow
+    }
 }

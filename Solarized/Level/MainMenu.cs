@@ -17,9 +17,9 @@ namespace Solarized.Screen
         {
         }
 
-        public override void Tick(float delta)
+        public override void Tick(GameTime gameTime)
         {
-            base.Tick(delta);
+            base.Tick(gameTime);
 
         }
 

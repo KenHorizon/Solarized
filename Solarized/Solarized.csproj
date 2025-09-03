@@ -64,7 +64,13 @@
     <Compile Include="Enums.cs" />
     <Compile Include="GamePanel.cs" />
     <Compile Include="Level\Buttons\BaseButton.cs" />
+    <Compile Include="Level\Font.cs" />
     <Compile Include="Level\GameGraphics.cs" />
+    <Compile Include="Level\Registry\DeferredRegister.cs" />
+    <Compile Include="Level\Registry\GameFonts.cs" />
+    <Compile Include="Level\Registry\GameRegistry.cs" />
+    <Compile Include="Level\Registry\Registry.cs" />
+    <Compile Include="Level\Registry\RegistryKey.cs" />
     <Compile Include="Level\StartupScreen.cs" />
     <Compile Include="Level\ResourceLocation.cs" />
     <Compile Include="Program.cs" />

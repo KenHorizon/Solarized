@@ -38,7 +38,7 @@ namespace Solarized.Level.Container
             }
             this.PrevMouseState = mouse;
         }
-        public abstract void Render(SpriteBatch sprite);
+        public abstract void Render(GameGraphics gameGraphics);
         public abstract void OnClick(int mouseX, int mouseY);
     }
 }

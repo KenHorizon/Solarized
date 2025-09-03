@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Solarized.Level;
+using Solarized.Level.Registry;
 using Solarized.Screen;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,6 @@ namespace Solarized
         public Random random;
         private GraphicsDeviceManager deviceManager;
         private SpriteBatch spriteBatch;
-        protected SpriteFont GameFont;
         protected static ContentManager contentManager;
         protected static AbstractScreen currentScreen;
         private GameGraphics GameGraphics;
@@ -68,7 +68,8 @@ namespace Solarized
         protected override void Initialize()
         {
             base.Initialize();
-            this.GameGraphics = new GameGraphics(this);
+            GameFonts.FONTS.Register();
+            this.GameGraphics = new GameGraphics(this, this.GraphicsDevice);
             this.SetScreen(new StartupScreen());
         }
         protected override void LoadContent()
@@ -76,7 +77,6 @@ namespace Solarized
             base.LoadContent();
             contentManager = new ContentManager(Services);
             this.spriteBatch = new SpriteBatch(GraphicsDevice);
-            this.GameFont = GamePanel.ContentManager.Load<SpriteFont>("Fonts/00");
         }
 
         public void SetScreen(AbstractScreen screen)
@@ -90,7 +90,7 @@ namespace Solarized
             {
                 Exit();
             }
-            CurrentScreen?.Tick((float) gameTime.ElapsedGameTime.TotalSeconds);
+            CurrentScreen?.Tick(gameTime);
             base.Update(gameTime);
         }
 
@@ -98,8 +98,11 @@ namespace Solarized
         {
             this.spriteBatch.Begin();
             //
-            this.GameGraphics.Render(this.spriteBatch, gameTime.ElapsedGameTime.TotalSeconds);
-            CurrentScreen?.Render(this.spriteBatch);
+            if (this.GameGraphics != null)
+            {
+                this.GameGraphics.Render(gameTime.ElapsedGameTime.TotalSeconds);
+                CurrentScreen?.Render(this.GameGraphics);
+            }
             //
             this.spriteBatch.End();
 

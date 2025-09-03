@@ -12,7 +12,7 @@ namespace Solarized.Level
 {
     abstract public class AbstractScreen
     {
-        protected Game game = null;
+        protected GamePanel game = null;
         protected string ScreenTitle = "";
         public List<string> Contents = new List<string>();
         protected List<GuisElements> GuisElements = new List<GuisElements>();
@@ -20,7 +20,7 @@ namespace Solarized.Level
         public int TitleY;
         public bool Hide = false;
         public void AddRenderableWidget(GuisElements element) => GuisElements.Add(element);
-        public Game GameInstance
+        public GamePanel GameInstance
         {
             get
             {
@@ -28,7 +28,7 @@ namespace Solarized.Level
             }
         }
         
-        public AbstractScreen(Game game, string screenTitle = "")
+        public AbstractScreen(GamePanel game, string screenTitle = "")
         {
             this.game = game;
             this.ScreenTitle = screenTitle;
@@ -48,15 +48,15 @@ namespace Solarized.Level
             }
         }
 
-        public virtual void Tick(float delta)
+        public virtual void Tick(GameTime gameTime)
         {
 
         }
-        public virtual void Render(SpriteBatch sprite)
+        public virtual void Render(GameGraphics gameGraphics)
         {
             foreach (var button in GuisElements)
             {
-                button.Render(sprite);
+                button.Render(gameGraphics);
             }
         }
     }
