@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Solarized.Level
 {
-    public class ResourceLocation
+    public class ResourceLocation<T>
     {
         public string NameSpace;
         public string FilePath;
@@ -19,6 +19,11 @@ namespace Solarized.Level
         {
             this.NameSpace = GamePanel.GAME_ID;
             this.FilePath = filePath;
+        }
+
+        public T Get()
+        {
+            return GamePanel.ContentManager.Load<T>(this.FilePath);
         }
     }
 }

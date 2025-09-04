@@ -14,6 +14,14 @@ namespace Solarized.Content
         GameOver,
         Shop
     }
+    public enum EntityClass
+    {
+        Object,
+        Player,
+        Enemy,
+        Boss,
+        NPC
+    }
     public enum DamageType
     {
         Physical,

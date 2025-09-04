@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Graphics.PackedVector;
+using Solarized.Content;
 using Solarized.Level;
+using Solarized.Level.Registry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +17,9 @@ namespace Solarized.Screen
     {
         public int progress;
         public double timer;
+        public ResourceLocation<Texture2D> TeamLogo = new ResourceLocation<Texture2D>("Textures/TeamLogo");
         public StartupScreen() : base(GamePanel.Instance)
         {
-            this.Contents.Add("Project: RRR");
-            this.Contents.Add("Presenting");
-            this.Contents.Add("Solarized: Dawn Of Darkness");
         }
 
         public override void Tick(GameTime gameTime)
@@ -67,14 +67,27 @@ namespace Solarized.Screen
 
         public override void Render(GameGraphics gameGraphics)
         {
-            base.Render(sprite);
-
+            base.Render(gameGraphics);
+            int x = this.game.GetScreenWidth() / 2;
+            int y = this.game.GetScreenHeight() / 2;
             switch (this.progress)
             {
                 case 0:
-                    float alpha = (float)(this.timer / 2.0F);
-                    Color color = Color.White * MathHelper.Clamp(alpha, 0.0F, 1.0F);
-
+                    float alphaIn = (float)(this.timer / 2.0F);
+                    gameGraphics.Draw(x, y, TeamLogo, Color.White * MathHelper.Clamp(alphaIn, 0.0F, 1.0F));
+                    break;
+                case 1:
+                    gameGraphics.Draw(x, y, TeamLogo, Color.White);
+                    break;
+                case 2:
+                    float alphaOut = (float)(this.timer / 2.0F);
+                    gameGraphics.Draw(x, y, TeamLogo, Color.White * MathHelper.Clamp(alphaOut, 0.0F, 1.0F));
+                    break;
+                case 3:
+                    string GameTitle = "Solarized: Dawn of Darkness";
+                    int TextToShow = (int) (this.timer * 10);
+                    string visible = GameTitle.Substring(0, TextToShow);
+                    gameGraphics.DrawString(x, y, visible);
                     break;
             }
         }

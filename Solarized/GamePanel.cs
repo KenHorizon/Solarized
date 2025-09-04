@@ -20,7 +20,7 @@ namespace Solarized
         public const int SCALE = 3;
         public const int MaxScreenCol = 24;
         public const int MaxScreenRow = 14;
-        private const int MaxTileSize = OriginalTiles * SCALE;
+        public const int MaxTileSize = OriginalTiles * SCALE;
         public const int ScreenWitdh = MaxTileSize * MaxScreenCol;
         public const int ScreenHeight = MaxTileSize * MaxScreenRow;
         public int WorldX;
@@ -50,7 +50,7 @@ namespace Solarized
         private static GamePanel _instance;
         public static GamePanel Instance
         {
-            get { return new  GamePanel(); }
+            get { return _instance; }
         }
         //
 
@@ -64,11 +64,12 @@ namespace Solarized
             this.Window.Title = "Solarized";
             this.Content.RootDirectory = "Content";
             this.IsMouseVisible = true;
+            _instance = this;
         }
         protected override void Initialize()
         {
             base.Initialize();
-            GameFonts.FONTS.Register();
+            RegistryFont.FONTS.Register();
             this.GameGraphics = new GameGraphics(this, this.GraphicsDevice);
             this.SetScreen(new StartupScreen());
         }
@@ -107,6 +108,18 @@ namespace Solarized
             this.spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+        public int GetScreenWidth()
+        {
+            return ScreenWitdh;
+        }
+        public int GetScreenHeight()
+        {
+            return ScreenHeight;
+        }
+        public int GetMaxTilSize()
+        {
+            return MaxTileSize;
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Solarized.Level.Registry
 {
-    public class GameFonts
+    public class RegistryFont
     {
         public static DeferredRegister<Font> FONTS = new DeferredRegister<Font>(GameRegistry.FONT, "Fonts");
 

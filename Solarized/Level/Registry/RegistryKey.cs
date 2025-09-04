@@ -8,7 +8,7 @@ namespace Solarized.Level.Registry
 {
     public class RegistryKey<T>
     {
-        public readonly string registryName;
+        private readonly string registryName;
         public T value;
         public RegistryKey(string RegistryName) 
         {
