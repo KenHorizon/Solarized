@@ -16,7 +16,7 @@ namespace Solarized.Level
         public Font(string name, string fontFile) 
         {
             this.Name = name;
-            this.spriteFont = GamePanel.Instance.Content.Load<SpriteFont>(fontFile);
+            this.spriteFont = GamePanel.ContentManager.Load<SpriteFont>(fontFile);
             registry[name] = spriteFont;
         }
 

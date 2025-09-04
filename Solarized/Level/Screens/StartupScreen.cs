@@ -17,7 +17,7 @@ namespace Solarized.Screen
     {
         public int progress;
         public double timer;
-        public ResourceLocation<Texture2D> TeamLogo = new ResourceLocation<Texture2D>("Textures/TeamLogo");
+        public ResourceLocation<Texture2D> TeamLogo = new ResourceLocation<Texture2D>(@"Textures/TeamLogo");
         public StartupScreen() : base(GamePanel.Instance)
         {
         }

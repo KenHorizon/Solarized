@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Solarized.Level.Registry;
 using Solarized.NPCs;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 

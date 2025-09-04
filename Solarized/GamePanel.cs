@@ -3,18 +3,14 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Solarized.Level;
-using Solarized.Level.Registry;
-using Solarized.Screen;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Solarized
 {
     public class GamePanel : Game
     {
+        private GraphicsDeviceManager deviceManager;
+        private SpriteBatch spriteBatch;
         public const string GAME_ID = "Solarized";
         public const int OriginalTiles = 16;
         public const int SCALE = 3;
@@ -34,69 +30,70 @@ namespace Solarized
         public int gameTick;
         public TimeSpan Time = new TimeSpan();
         public Random random;
-        private GraphicsDeviceManager deviceManager;
-        private SpriteBatch spriteBatch;
-        protected static ContentManager contentManager;
-        protected static AbstractScreen currentScreen;
+
         private GameGraphics GameGraphics;
+        #region Instances
+
+        protected static ContentManager contentManager;
         public static ContentManager ContentManager
         {
             get { return contentManager; }
         }
+        protected static AbstractScreen currentScreen;
         public static AbstractScreen CurrentScreen
         {
             get { return currentScreen; }
         }
+
         private static GamePanel _instance;
         public static GamePanel Instance
         {
             get { return _instance; }
         }
+        #endregion
         //
-
         public GamePanel()
         {
-            this.random = new Random((int) this.Time.TotalSeconds);
+            this.random = new Random((int) this.Time.Milliseconds);
             this.deviceManager = new GraphicsDeviceManager(this);
             this.deviceManager.PreferredBackBufferWidth = ScreenWitdh;
             this.deviceManager.PreferredBackBufferHeight = ScreenHeight;
-            this.deviceManager.ApplyChanges();
-            this.Window.Title = "Solarized";
             this.Content.RootDirectory = "Content";
+            this.Window.Title = "Solarized";
             this.IsMouseVisible = true;
             _instance = this;
-        }
-        protected override void Initialize()
-        {
-            base.Initialize();
-            RegistryFont.FONTS.Register();
-            this.GameGraphics = new GameGraphics(this, this.GraphicsDevice);
-            this.SetScreen(new StartupScreen());
-        }
-        protected override void LoadContent()
-        {
-            base.LoadContent();
             contentManager = new ContentManager(Services);
-            this.spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
-        public void SetScreen(AbstractScreen screen)
+        protected override void Initialize()
         {
-            currentScreen = screen;
+            // TODO: Add your initialization logic here
+
+            base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
+            this.spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-            {
-                Exit();
-            }
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
+                Keyboard.GetState().IsKeyDown(Keys.Escape))
+                this.Exit();
+            
             CurrentScreen?.Tick(gameTime);
+            // TODO: Add your update logic here
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
+            this.GraphicsDevice.Clear(Color.CornflowerBlue);
             this.spriteBatch.Begin();
             //
             if (this.GameGraphics != null)
@@ -106,6 +103,8 @@ namespace Solarized
             }
             //
             this.spriteBatch.End();
+
+            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }

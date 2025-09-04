@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Solarized.Content;
 using Solarized.Level.Registry;
+using Solarized.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;

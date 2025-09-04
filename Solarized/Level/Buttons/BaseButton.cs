@@ -2,9 +2,11 @@
 using Microsoft.Xna.Framework.Graphics;
 using Solarized.Content;
 using Solarized.Level.Container;
+using Solarized.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,8 +38,13 @@ namespace Solarized.Level.Buttons
         {
             this.align = align;
         }
+        public void SetupColor(Color DefaultColor, Color HoveredColor)
+        {
+            this.DefaultColor = DefaultColor;
+            this.HoveredColor = HoveredColor;
+        }
 
-        public override void Render(SpriteBatch sprite)
+        public override void Render(GameGraphics gameGraphics)
         {
             Color color = this.IsMouseHovered == false ? DefaultColor : HoveredColor;
             Vector2 TextSize = Font.MeasureString(this.Text);
@@ -45,16 +52,12 @@ namespace Solarized.Level.Buttons
             if (this.align == Align.Centered)
             {
                 TextPosition = this.Position + new Vector2((this.Width - TextSize.X) / 2, (this.Height - TextSize.Y) / 2);
-            } else
+            }
+            else
             {
                 TextPosition = this.Position + new Vector2(this.Width, (this.Height - TextSize.Y) / 2);
             }
-            sprite.DrawString(Font, Text, TextPosition, color);
-        }
-        public void SetupColor(Color DefaultColor, Color HoveredColor)
-        {
-            this.DefaultColor = DefaultColor;
-            this.HoveredColor = HoveredColor;
+            gameGraphics.DrawString(Font, Text, TextPosition, color);
         }
     }
 }

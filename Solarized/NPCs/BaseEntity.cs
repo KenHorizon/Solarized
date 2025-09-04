@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using Solarized.Content;
 using Solarized.Effect;
 using Solarized.Level.Registry;
+using Solarized.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,7 +67,7 @@ namespace Solarized.NPCs
 
         public void ApplyEffects(RegistryKey<BaseEffect> effect, int duration)
         {
-            var isAlreadyHave = this.effects.FirstOrDefault(effects => effects.registryName == effect.registryName);
+            var isAlreadyHave = this.effects.FirstOrDefault(effects => effects.RegistryName() == effect.RegistryName());
         }
 
         public virtual void Tick(GameTime gameTime)

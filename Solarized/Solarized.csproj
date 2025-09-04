@@ -1,148 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1A68E54D-05AC-41ED-96D8-3D69B382A512}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Solarized</RootNamespace>
-    <AssemblyName>Solarized</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RollForward>Major</RollForward>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <TieredCompilation>false</TieredCompilation>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Solarized.Program</StartupObject>
-  </PropertyGroup>
-  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Game.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Graphics.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.*" />
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.*" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Effect\BaseEffect.cs" />
-    <Compile Include="Effect\BurnEffect.cs" />
-    <Compile Include="Enums.cs" />
-    <Compile Include="GamePanel.cs" />
-    <Compile Include="Level\Buttons\BaseButton.cs" />
-    <Compile Include="Level\Font.cs" />
-    <Compile Include="Level\GameGraphics.cs" />
-    <Compile Include="Level\Registry\DeferredRegister.cs" />
-    <Compile Include="Level\Registry\Attributes.cs" />
-    <Compile Include="Effect\Effects.cs" />
-    <Compile Include="Level\Registry\Font.cs" />
-    <Compile Include="Level\Registry\GameRegistry.cs" />
-    <Compile Include="Level\Registry\Registry.cs" />
-    <Compile Include="Level\Registry\RegistryKey.cs" />
-    <Compile Include="Level\Screens\StartupScreen.cs" />
-    <Compile Include="Level\ResourceLocation.cs" />
-    <Compile Include="Level\Attribute\GameAttribute.cs" />
-    <Compile Include="Level\Attribute\AttributeInstance.cs" />
-    <Compile Include="Level\Attribute\AttributeModifier.cs" />
-    <Compile Include="Level\WorldLevel.cs" />
-    <Compile Include="NPCs\BaseEntity.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Level\GuisElements.cs" />
-    <Compile Include="Level\Screens\MainMenu.cs" />
-    <Compile Include="Level\Screens\AbstractScreen.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Content\Fonts\00.ttf" />
-    <None Include="Content\Fonts\01.ttf" />
-    <None Include="Content\Textures\Fonts\CodebreakerDialog.xnb" />
-    <None Include="Content\Textures\Fonts\HPBarFont.xnb" />
-    <None Include="README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\Textures\Containers\accessory.png" />
-    <Content Include="Content\Textures\Effect\antidote.png" />
-    <Content Include="Content\Textures\Effect\armor_break.png" />
-    <Content Include="Content\Textures\Effect\bleed.png" />
-    <Content Include="Content\Textures\Effect\cursed.png" />
-    <Content Include="Content\Textures\Effect\curse_flame.png" />
-    <Content Include="Content\Textures\Effect\darkin_curse.png" />
-    <Content Include="Content\Textures\Effect\demonic_will.png" />
-    <Content Include="Content\Textures\Effect\dragon_flame.png" />
-    <Content Include="Content\Textures\Effect\fear.png" />
-    <Content Include="Content\Textures\Effect\frostbite.png" />
-    <Content Include="Content\Textures\Effect\healing_sickness.png" />
-    <Content Include="Content\Textures\Effect\holy_flame.png" />
-    <Content Include="Content\Textures\Effect\hunger_boost.png" />
-    <Content Include="Content\Textures\Effect\immunity.png" />
-    <Content Include="Content\Textures\Effect\iron_skin.png" />
-    <Content Include="Content\Textures\Effect\leech.png" />
-    <Content Include="Content\Textures\Effect\lethal_poison.png" />
-    <Content Include="Content\Textures\Effect\lightning.png" />
-    <Content Include="Content\Textures\Effect\nature_heal.png" />
-    <Content Include="Content\Textures\Effect\paralyze.png" />
-    <Content Include="Content\Textures\Effect\rage.png" />
-    <Content Include="Content\Textures\Effect\recovery.png" />
-    <Content Include="Content\Textures\Effect\rooted.png" />
-    <Content Include="Content\Textures\Effect\stun.png" />
-    <Content Include="Content\Textures\Effect\thorns.png" />
-    <Content Include="Content\Textures\Effect\vulnerable.png" />
-    <Content Include="Content\Textures\Effect\wings.png" />
-    <Content Include="Content\Textures\Effect\wounded.png" />
-    <Content Include="Content\Textures\Entity\Enemy\Carrier.png" />
-    <Content Include="Content\Textures\Entity\Enemy\Sourge.png" />
-    <Content Include="Content\Textures\Entity\Enemy\Zeinburg.png" />
-    <Content Include="Content\Textures\Entity\NPC\ShopKeeper.png" />
-    <Content Include="Content\Textures\Entity\Player\Player.png" />
-    <Content Include="Content\Textures\Item\ArmorUpgrade.png" />
-    <Content Include="Content\Textures\Item\CritUpgrade.png" />
-    <Content Include="Content\Textures\Item\DamageUpgrade.png" />
-    <Content Include="Content\Textures\Item\HealthUpgrade.png" />
-    <Content Include="Content\Textures\MainMenu\MainMenu.png" />
-    <Content Include="Content\Textures\Projectiles\BaseBullet.png" />
-    <Content Include="Icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\Miscs\" />
-    <Folder Include="Content\Shaders\" />
-    <Folder Include="Content\Sounds\" />
-    <Folder Include="Content\Textures\Tiles\" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="RestoreDotnetTools" BeforeTargets="CollectPackageReferences">
+    <Message Text="Restoring dotnet tools (this might take a while depending on your internet speed and should only happen upon building your project for the first time, or after upgrading MonoGame, or clearing your nuget cache)" Importance="High" />
+    <Exec Command="dotnet tool restore" />
+  </Target>
 </Project>

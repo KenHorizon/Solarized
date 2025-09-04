@@ -1,4 +1,4 @@
-﻿using Solarized.NPCs.Attributes;
+﻿using Solarized.NPCs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

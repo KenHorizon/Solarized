@@ -23,9 +23,9 @@ namespace Solarized.Screen
 
         }
 
-        public override void Render(SpriteBatch sprite)
+        public override void Render(GameGraphics gameGraphics)
         {
-            base.Render(sprite);
+            base.Render(gameGraphics);
         }
 
     }
