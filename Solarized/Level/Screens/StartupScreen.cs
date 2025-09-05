@@ -11,6 +11,7 @@ namespace Solarized.Screen
         public int progress;
         public double timer;
         public ResourceLocation<Texture2D> TeamLogo = new ResourceLocation<Texture2D>("Content/Textures/TeamLogo");
+        public ResourceLocation<Texture2D> PresentingLogo = new ResourceLocation<Texture2D>("Content/Textures/PresentingLogo");
         public StartupScreen() : base(GamePanel.Instance)
         {
         }
@@ -46,7 +47,7 @@ namespace Solarized.Screen
                     }
                     break;
                 case 4:
-                    GameInstance.SetScreen(new MainMenu());
+                    this.game.SetScreen(new MainMenu());
                     break;
             }
         }
@@ -62,26 +63,24 @@ namespace Solarized.Screen
         {
             base.Render(gameGraphics);
             Texture2D texture = TeamLogo.Get();
-            int x = (this.game.GetScreenWidth() - texture.Width) / 2;
-            int y = 0;
             switch (this.progress)
             {
                 case 0:
                     float alphaIn = (float)(this.timer / 2.0F);
-                    gameGraphics.Draw(x, y, TeamLogo, Color.White * MathHelper.Clamp(alphaIn, 0.0F, 1.0F));
+                    GraphicManager.DrawCenteredFit(TeamLogo, Color.White * MathHelper.Clamp(alphaIn, 0.0F, 1.0F));
                     break;
                 case 1:
-                    gameGraphics.Draw(x, y, TeamLogo, Color.White);
+                    GraphicManager.DrawCenteredFit(TeamLogo);
                     break;
                 case 2:
                     float alphaOut = (float)(this.timer / 2.0F);
-                    gameGraphics.Draw(x, y, TeamLogo, Color.White * MathHelper.Clamp(alphaOut, 0.0F, 1.0F));
+                    GraphicManager.DrawCenteredFit(PresentingLogo, Color.White * MathHelper.Clamp(alphaOut, 0.0F, 1.0F));
                     break;
                 case 3:
                     string GameTitle = "Solarized: Dawn of Darkness";
                     Vector2 size = FontManager.MeasureString(GameTitle);
-                    y = this.game.GetScreenHeight() / 2;
-                    FontManager.DrawText(new Vector2((x - size.X) / 2, y), GameTitle, Color.White);
+                    FontManager.DrawText(new Vector2((this.game.GetScreenHeight() + size.Length()) / 2,
+                        (this.game.GetScreenHeight() - size.Length()) / 2), GameTitle, Color.White);
                     break;
             }
         }

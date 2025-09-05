@@ -32,6 +32,30 @@
 /processorParam:TextureFormat=Compressed
 /build:DefaultFont.spritefont
 
+#begin Textures/MainMenu/MainMenuBackground.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/MainMenu/MainMenuBackground.png
+
+#begin Textures/PresentingLogo.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/PresentingLogo.png
+
 #begin Textures/TeamLogo.png
 /importer:TextureImporter
 /processor:TextureProcessor

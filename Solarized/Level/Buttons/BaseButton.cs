@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Solarized.Level.Container;
+using Solarized.Level.Fonts;
 using Solarized.Utils;
 using System;
 
@@ -51,7 +52,7 @@ namespace Solarized.Level.Buttons
             {
                 TextPosition = this.Position + new Vector2(this.Width, (this.Height - TextSize.Y) / 2);
             }
-            gameGraphics.DrawString(Font, Text, TextPosition, color);
+            FontManager.DrawText(TextPosition, this.Text, color);
         }
     }
 }

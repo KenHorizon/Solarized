@@ -80,7 +80,7 @@ namespace Solarized
         {
             this.Font = this.Content.Load<SpriteFont>("DefaultFont");
             this.spriteBatch = new SpriteBatch(GraphicsDevice);
-            this.GameGraphics = new GameGraphics(this.GraphicsDevice);
+            this.GameGraphics = new GameGraphics();
             this.SetScreen(new StartupScreen());
 
             // TODO: use this.Content to load your game content here
@@ -103,7 +103,7 @@ namespace Solarized
 
         protected override void Draw(GameTime gameTime)
         {
-            this.GraphicsDevice.Clear(Color.Black);
+            this.GraphicsDevice.Clear(Color.DarkGray);
             this.spriteBatch.Begin();
             //
             if (this.GameGraphics != null)

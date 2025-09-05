@@ -5,7 +5,7 @@ using Solarized.Utils;
 
 namespace Solarized.Level
 {
-    public class GameGraphics : SpriteBatch
+    public class GameGraphics
     {
         protected GamePanel game;
         public SpriteBatch spriteBatch;
@@ -13,7 +13,7 @@ namespace Solarized.Level
         {
             get { return game; }
         }
-        public GameGraphics(GraphicsDevice graphicsDevice) : base(graphicsDevice)
+        public GameGraphics()
         {
             this.game = GamePanel.Instance;
             IGraphicsDeviceService IdeviceService = (IGraphicsDeviceService)GamePanel.Instance.Services.GetService(typeof(IGraphicsDeviceService));
@@ -45,13 +45,13 @@ namespace Solarized.Level
         {
             this.Draw(x, y, texture, color, 1.0F, 0.0F);
         }
-        public void Draw(int x, int y, ResourceLocation<Texture2D> texture)
-        {
-            this.Draw(x, y, texture, Color.White, 1.0F, 0.0F);
-        }
         public void Draw(int x, int y, ResourceLocation<Texture2D> texture, float scale)
         {
             this.Draw(x, y, texture, Color.White, scale, 0.0F);
+        }
+        public void Draw(int x, int y, ResourceLocation<Texture2D> texture)
+        {
+            this.Draw(x, y, texture, Color.White, 1.0F, 0.0F);
         }
     }
 }
