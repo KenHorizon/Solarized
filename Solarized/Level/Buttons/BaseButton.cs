@@ -9,20 +9,21 @@ namespace Solarized.Level.Buttons
 {
     public class BaseButton : GuisElements
     {
-        public Texture2D Texture;
         public string Text;
         public SpriteFont Font;
         public Action OnPress;
         public Color DefaultColor = Color.White;
         public Color HoveredColor = Color.Blue;
         protected Align align = Align.Centered;
-        public BaseButton(int x, int y, string text, Texture2D texture, SpriteFont font)
+        public BaseButton(int x, int y, int witdh, int height, string text, SpriteFont font, Action action)
         {
-            this.Texture = texture;
             this.Font = font;
             this.Text = text;
             this.PosX = x;
             this.PosY = y;
+            this.Width = witdh;
+            this.Height = height;
+            this.OnPress = action;
         }
         public override void OnClick(int mouseX, int mouseY)
         {
@@ -42,7 +43,7 @@ namespace Solarized.Level.Buttons
         public override void Render(GameGraphics gameGraphics)
         {
             Color color = this.IsMouseHovered == false ? DefaultColor : HoveredColor;
-            Vector2 TextSize = Font.MeasureString(this.Text);
+            Vector2 TextSize = FontManager.MeasureString(this.Text);
             Vector2 TextPosition;
             if (this.align == Align.Centered)
             {

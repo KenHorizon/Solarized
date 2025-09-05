@@ -22,6 +22,7 @@ namespace Solarized.Level.Container
             if (this.Bounds.Contains(point))
             {
                 this.IsMouseHovered = true;
+                
                 if (mouse.LeftButton == ButtonState.Pressed && PrevMouseState.LeftButton == ButtonState.Released)
                 {
                     this.OnClick(mouse.X, mouse.Y);

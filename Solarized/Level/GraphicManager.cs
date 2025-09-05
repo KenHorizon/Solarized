@@ -24,7 +24,7 @@ namespace Solarized.Level
         /// <summary>
         /// Draws a texture scaled to fit inside a rectangle while keeping aspect ratio and centered on screen.
         /// </summary>
-        public static void DrawCenteredFit(ResourceLocation<Texture2D> resourceLocation, Color color)
+        public static void DrawCenteredFit(ResourceLocation<Texture2D> resourceLocation, int x, int y, Color color)
         {
             Texture2D texture = resourceLocation.Get();
             int baseWidth = texture.Width;
@@ -34,27 +34,35 @@ namespace Solarized.Level
             int screenH = GamePanel.Instance.GetScreenHeight();
 
             // Compute scale so it never exceeds the screen size
-            float scaleX = (float)screenW / baseWidth;
-            float scaleY = (float)screenH / baseHeight;
+            float scaleX = (float) screenW / baseWidth;
+            float scaleY = (float) screenH / baseHeight;
             float scale = Math.Min(scaleX, scaleY);
 
             // Final draw size
-            int drawW = (int)(baseWidth * scale);
-            int drawH = (int)(baseHeight * scale);
+            int drawW = (int) (baseWidth * scale);
+            int drawH = (int)( baseHeight * scale);
 
             // Centered rectangle
             Rectangle drawRect = new Rectangle(
-                (screenW - drawW) / 2,
-                (screenH - drawH) / 2,
+                (screenW - drawW) / 2 + x,
+                (screenH - drawH) / 2 + y,
                 drawW,
                 drawH
             );
 
             spriteBatch.Draw(texture, drawRect, color);
         }
+        public static void DrawCenteredFit(ResourceLocation<Texture2D> resourceLocation, int x, int y)
+        {
+            DrawCenteredFit(resourceLocation, x, y, Color.White);
+        }
+        public static void DrawCenteredFit(ResourceLocation<Texture2D> resourceLocation, Color color)
+        {
+            DrawCenteredFit(resourceLocation, 0, 0, color);
+        }
         public static void DrawCenteredFit(ResourceLocation<Texture2D> resourceLocation)
         {
-            DrawCenteredFit(resourceLocation, Color.White);
+            DrawCenteredFit(resourceLocation, 0, 0, Color.White);
         }
         /// <summary>
         /// Draws a texture scaled to fit inside a rectangle while keeping aspect ratio.

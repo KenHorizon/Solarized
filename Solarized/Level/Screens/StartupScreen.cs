@@ -47,7 +47,7 @@ namespace Solarized.Screen
                     }
                     break;
                 case 4:
-                    this.game.SetScreen(new MainMenu());
+                    this.GameInstance.SetScreen(new MainMenu());
                     break;
             }
         }
@@ -79,8 +79,7 @@ namespace Solarized.Screen
                 case 3:
                     string GameTitle = "Solarized: Dawn of Darkness";
                     Vector2 size = FontManager.MeasureString(GameTitle);
-                    FontManager.DrawText(new Vector2((this.game.GetScreenHeight() + size.Length()) / 2,
-                        (this.game.GetScreenHeight() - size.Length()) / 2), GameTitle, Color.White);
+                    FontManager.DrawCenteredFit(0, 0, GameTitle, Color.White);
                     break;
             }
         }

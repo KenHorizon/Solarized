@@ -35,6 +35,7 @@ namespace Solarized
         public Random random;
         public SpriteFont Font;
         private GameGraphics GameGraphics;
+        MouseState mouse = Mouse.GetState();
         #region Instances
 
         protected static ContentManager contentManager;
@@ -94,11 +95,21 @@ namespace Solarized
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-            
+            this.MouseX = mouse.X;
+            this.MouseY = mouse.Y;
             CurrentScreen?.Tick(gameTime);
+            if (this.LeftClicked())
+            {
+                CurrentScreen?.OnMouseClicked(this.MouseX, this.MouseY);
+            }
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+        }
+
+        public bool LeftClicked()
+        {
+            return mouse.LeftButton == ButtonState.Pressed;
         }
 
         protected override void Draw(GameTime gameTime)
