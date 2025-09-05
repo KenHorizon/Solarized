@@ -13,6 +13,7 @@ namespace Solarized.Level
         public int TitleX;
         public int TitleY;
         public bool Hide = false;
+        private bool init;
         public void AddRenderableWidget(GuisElements element) => GuisElements.Add(element);
         public GamePanel GameInstance
         {
@@ -26,10 +27,13 @@ namespace Solarized.Level
         {
             this.game = game;
             this.ScreenTitle = screenTitle;
-            this.Init();
         }
 
-        public virtual void Init() { }
+        public virtual void Init() 
+        {
+            this.init = true;
+        }
+
         public void OnMouseHovered(int x, int y)
         {
         }
@@ -44,6 +48,10 @@ namespace Solarized.Level
 
         public virtual void Tick(GameTime gameTime)
         {
+            if (this.init == false)
+            {
+                this.Init();
+            }
             foreach (var button in GuisElements)
             {
                 button.Tick();
@@ -51,10 +59,15 @@ namespace Solarized.Level
         }
         public virtual void Render(GameGraphics gameGraphics)
         {
+            this.RenderBackground(gameGraphics);
+
             foreach (var button in GuisElements)
             {
                 button.Render(gameGraphics);
             }
+        }
+        public virtual void RenderBackground(GameGraphics gameGraphics)
+        {
         }
     }
 }

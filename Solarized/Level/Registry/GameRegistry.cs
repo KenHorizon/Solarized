@@ -1,4 +1,4 @@
-﻿using Solarized.Effect;
+﻿using Solarized.Effects;
 using Solarized.NPCs;
 
 namespace Solarized.Level.Registry

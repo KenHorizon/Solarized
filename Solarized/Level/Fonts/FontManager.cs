@@ -26,7 +26,7 @@ namespace Solarized.Level.Fonts
             scales = Math.Min(scale, scale);
             Vector2 position = new Vector2((screenWidth - textSize.X * scale) / 2.0F + x, 
                 (screenHeight - textSize.Y * scale) / 2.0F + y);
-            DrawText(font, position, text, color, scale);
+            DrawText(GamePanel.Instance.spriteBatch, font, position, text, color, scale);
         }
         public static void DrawCenteredFit(int x, int y, string text, Color color, float scale = 1.0F)
         {
@@ -37,9 +37,8 @@ namespace Solarized.Level.Fonts
         {
             DrawCenteredFit(GamePanel.Instance.Font, x, y, text, Color.White, scale);
         }
-        public static void DrawText(SpriteFont font, Vector2 position, string text, Color color, float scale = 1.0F)
+        public static void DrawText(SpriteBatch spriteBatch, SpriteFont font, Vector2 position, string text, Color color, float scale = 1.0F)
         {
-            SpriteBatch spriteBatch = GamePanel.Instance.spriteBatch;
             Vector2 cursor = position;
             foreach (var part in ParseTextParts(text, color))
             {
@@ -48,9 +47,13 @@ namespace Solarized.Level.Fonts
                 cursor.X += font.MeasureString(part.Text).X * scale;
             }
         }
+        public static void DrawText(SpriteBatch spriteBatch, Vector2 position, string text, Color color, float scale = 1.0F)
+        {
+            DrawText(spriteBatch, GamePanel.Instance.Font, position, text, color, scale);
+        }
         public static void DrawText(Vector2 position, string text, Color color, float scale = 1.0F)
         {
-            DrawText(GamePanel.Instance.Font, position, text, color, scale);
+            DrawText(GamePanel.Instance.spriteBatch, GamePanel.Instance.Font, position, text, color, scale);
         }
         public static Vector2 MeasureString(SpriteFont font, string text, float scale = 1f)
         {

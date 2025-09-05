@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Solarized.Effect;
+using Solarized.Effects;
 using Solarized.Level;
 using Solarized.Level.Registry;
 using Solarized.Screen;
@@ -72,8 +72,8 @@ namespace Solarized
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            Effects.EFFECTS.Register();
-            Attributes.ATTRIBUTES.Register();
+            RegistryEffects.EFFECTS.Register();
+            RegistryAttributes.ATTRIBUTES.Register();
             base.Initialize();
         }
 
@@ -115,7 +115,7 @@ namespace Solarized
         protected override void Draw(GameTime gameTime)
         {
             this.GraphicsDevice.Clear(Color.DarkGray);
-            this.spriteBatch.Begin();
+            this.spriteBatch.Begin(blendState: BlendState.AlphaBlend);
             //
             if (this.GameGraphics != null)
             {

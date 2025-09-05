@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Solarized.Effect;
+using Solarized.Effects;
 using Solarized.Level.Registry;
 using Solarized.Utils;
 using System;
@@ -88,9 +88,9 @@ namespace Solarized.NPCs
         public void DamageDealt(float amount)
         {
             float damageDealt = (float) (amount * this.DamageDealt());
-            if (this.randon.NextDouble() <= this.GetAttributeValue(Attributes.CRITICAL_STRIKE))
+            if (this.randon.NextDouble() <= this.GetAttributeValue(RegistryAttributes.CRITICAL_STRIKE))
             {
-                damageDealt *= (float) this.GetAttributeValue(Attributes.CRITICAL_DAMAGE);
+                damageDealt *= (float) this.GetAttributeValue(RegistryAttributes.CRITICAL_DAMAGE);
                 this.IsCritAttack = true;
             } else
             {
@@ -113,20 +113,20 @@ namespace Solarized.NPCs
     
         public float MaxHealth()
         {
-            return (float)this.GetAttributeValue(Attributes.MAX_HEALTH);
+            return (float)this.GetAttributeValue(RegistryAttributes.MAX_HEALTH);
         }
 
         public float Armor()
         {
-            return (float) this.GetAttributeValue(Attributes.ARMOR);
+            return (float) this.GetAttributeValue(RegistryAttributes.ARMOR);
         }
         public float DamageDealt()
         {
-            return (float)this.GetAttributeValue(Attributes.DAMAGE_DEALT);
+            return (float)this.GetAttributeValue(RegistryAttributes.DAMAGE_DEALT);
         }
         public float DamageTaken()
         {
-            return (float)this.GetAttributeValue(Attributes.DAMAGE_TAKEN);
+            return (float)this.GetAttributeValue(RegistryAttributes.DAMAGE_TAKEN);
         }
         protected void RegisterAttributes(RegistryKey<GameAttribute> registry)
         {

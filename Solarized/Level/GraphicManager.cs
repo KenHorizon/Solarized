@@ -44,8 +44,8 @@ namespace Solarized.Level
 
             // Centered rectangle
             Rectangle drawRect = new Rectangle(
-                (screenW - drawW) / 2 + x,
-                (screenH - drawH) / 2 + y,
+                ((screenW - drawW) / 2) + x,
+                y,
                 drawW,
                 drawH
             );

@@ -2,7 +2,7 @@
 
 namespace Solarized.Level.Registry
 {
-    public class Attributes
+    public class RegistryAttributes
     {
         public static DeferredRegister<GameAttribute> ATTRIBUTES = new DeferredRegister<GameAttribute>(GameRegistry.ATTRIBUTE, "Attributes");
 

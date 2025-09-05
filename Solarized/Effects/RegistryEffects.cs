@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Solarized.Effect
+namespace Solarized.Effects
 {
-    public class Effects
+    public class RegistryEffects
     {
         public static DeferredRegister<BaseEffect> EFFECTS = new DeferredRegister<BaseEffect>(GameRegistry.EFFECTS, "Effects");
 

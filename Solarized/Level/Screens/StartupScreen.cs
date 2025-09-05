@@ -59,9 +59,8 @@ namespace Solarized.Screen
             this.timer = 0;
         }
 
-        public override void Render(GameGraphics gameGraphics)
+        public override void RenderBackground(GameGraphics gameGraphics)
         {
-            base.Render(gameGraphics);
             Texture2D texture = TeamLogo.Get();
             switch (this.progress)
             {

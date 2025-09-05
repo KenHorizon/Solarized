@@ -32,6 +32,12 @@
 /processorParam:TextureFormat=Compressed
 /build:DefaultFont.spritefont
 
+#begin Effects/BaseButtonEffect.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/BaseButtonEffect.fx
+
 #begin Textures/MainMenu/GameTitle.png
 /importer:TextureImporter
 /processor:TextureProcessor
