@@ -1,15 +1,8 @@
 ﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Graphics.PackedVector;
-using Solarized.Content;
 using Solarized.Level;
-using Solarized.Level.Registry;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Solarized.Level.Fonts;
 
 namespace Solarized.Screen
 {
@@ -17,7 +10,7 @@ namespace Solarized.Screen
     {
         public int progress;
         public double timer;
-        public ResourceLocation<Texture2D> TeamLogo = new ResourceLocation<Texture2D>(@"Textures/TeamLogo");
+        public ResourceLocation<Texture2D> TeamLogo = new ResourceLocation<Texture2D>("Content/Textures/TeamLogo");
         public StartupScreen() : base(GamePanel.Instance)
         {
         }
@@ -68,8 +61,9 @@ namespace Solarized.Screen
         public override void Render(GameGraphics gameGraphics)
         {
             base.Render(gameGraphics);
-            int x = this.game.GetScreenWidth() / 2;
-            int y = this.game.GetScreenHeight() / 2;
+            Texture2D texture = TeamLogo.Get();
+            int x = (this.game.GetScreenWidth() - texture.Width) / 2;
+            int y = 0;
             switch (this.progress)
             {
                 case 0:
@@ -85,9 +79,9 @@ namespace Solarized.Screen
                     break;
                 case 3:
                     string GameTitle = "Solarized: Dawn of Darkness";
-                    int TextToShow = (int) (this.timer * 10);
-                    string visible = GameTitle.Substring(0, TextToShow);
-                    gameGraphics.DrawString(x, y, visible);
+                    Vector2 size = FontManager.MeasureString(GameTitle);
+                    y = this.game.GetScreenHeight() / 2;
+                    FontManager.DrawText(new Vector2((x - size.X) / 2, y), GameTitle, Color.White);
                     break;
             }
         }

@@ -2,7 +2,10 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Solarized.Effect;
 using Solarized.Level;
+using Solarized.Level.Registry;
+using Solarized.Screen;
 using System;
 
 namespace Solarized
@@ -10,7 +13,7 @@ namespace Solarized
     public class GamePanel : Game
     {
         private GraphicsDeviceManager deviceManager;
-        private SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch;
         public const string GAME_ID = "Solarized";
         public const int OriginalTiles = 16;
         public const int SCALE = 3;
@@ -30,7 +33,7 @@ namespace Solarized
         public int gameTick;
         public TimeSpan Time = new TimeSpan();
         public Random random;
-
+        public SpriteFont Font;
         private GameGraphics GameGraphics;
         #region Instances
 
@@ -68,17 +71,24 @@ namespace Solarized
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            Effects.EFFECTS.Register();
+            Attributes.ATTRIBUTES.Register();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
+            this.Font = this.Content.Load<SpriteFont>("DefaultFont");
             this.spriteBatch = new SpriteBatch(GraphicsDevice);
+            this.GameGraphics = new GameGraphics(this.GraphicsDevice);
+            this.SetScreen(new StartupScreen());
 
             // TODO: use this.Content to load your game content here
         }
-
+        public void SetScreen(AbstractScreen screen)
+        {
+            currentScreen = screen;
+        }
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
@@ -93,7 +103,7 @@ namespace Solarized
 
         protected override void Draw(GameTime gameTime)
         {
-            this.GraphicsDevice.Clear(Color.CornflowerBlue);
+            this.GraphicsDevice.Clear(Color.Black);
             this.spriteBatch.Begin();
             //
             if (this.GameGraphics != null)
@@ -110,13 +120,13 @@ namespace Solarized
         }
         public int GetScreenWidth()
         {
-            return ScreenWitdh;
+            return this.GraphicsDevice.Viewport.Width;
         }
         public int GetScreenHeight()
         {
-            return ScreenHeight;
+            return this.GraphicsDevice.Viewport.Height;
         }
-        public int GetMaxTilSize()
+        public int GetMaxTileSize()
         {
             return MaxTileSize;
         }

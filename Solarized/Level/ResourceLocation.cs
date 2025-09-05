@@ -17,7 +17,7 @@
 
         public T Get()
         {
-            return GamePanel.ContentManager.Load<T>(this.FilePath);
+            return GamePanel.ContentManager.Load<T>(@"" + this.FilePath);
         }
     }
 }

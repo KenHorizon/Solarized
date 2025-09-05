@@ -25,17 +25,12 @@
 /processorParam:TextureFormat=Color
 /build:../../../../Arts/TeamLogo.png;Textures/TeamLogo.png
 
-#begin Textures/TeamLogo.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
+#begin DefaultFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/TeamLogo.png
+/processorParam:TextureFormat=Compressed
+/build:DefaultFont.spritefont
 
 #begin Textures/TeamLogo.png
 /importer:TextureImporter
