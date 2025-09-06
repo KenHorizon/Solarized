@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Solarized.Level;
 using Solarized.Level.Buttons;
+using Solarized.Level.Sound;
 using System.Diagnostics;
 
 namespace Solarized.Screen
@@ -22,21 +23,36 @@ namespace Solarized.Screen
         public override void Init()
         {
             base.Init();
+            MusicManager.Play(SoundID.INTRO);
             this.SetupButtons();
         }
-
         private void SetupButtons()
         {
-            int x = 20;
-            int y = 10;
             int row = 0;
             foreach (string content in this.Contents)
             {
-                row++;
-                y += (10 * row);
+                Vector2 vec = this.GameInstance.Font.MeasureString(content);
+                int padding = (int) vec.Y + 20;
+                int x = (int) ((this.GameInstance.GetScreenWidth() - vec.X) / 2);
+                int y = this.GameInstance.GetMaxTileSize() * 4;
+                row += 1;
                 if (content.Equals(Contents[0]))
                 {
-                    this.AddRenderableWidget(new BaseButton(x, y, 200, 60, content, this.GameInstance.Font, () =>
+                    this.AddRenderableWidget(new BaseButton(x, y + (padding * row), 250, 20, content, this.GameInstance.Font, () =>
+                    {
+                        this.GameInstance.Exit();
+                    }));
+                }
+                if (content.Equals(Contents[1]))
+                {
+                    this.AddRenderableWidget(new BaseButton(x, y + (padding * row), 250, 20, content, this.GameInstance.Font, () =>
+                    {
+                        this.GameInstance.Exit();
+                    }));
+                }
+                if (content.Equals(Contents[2]))
+                {
+                    this.AddRenderableWidget(new BaseButton(x, y + (padding * row), 250, 20, content, this.GameInstance.Font, () =>
                     {
                         this.GameInstance.Exit();
                     }));
@@ -47,12 +63,10 @@ namespace Solarized.Screen
         public override void Tick(GameTime gameTime)
         {   
             base.Tick(gameTime);
-
         }
 
         public override void RenderBackground(GameGraphics gameGraphics)
         {
-            base.RenderBackground(gameGraphics);
             GraphicManager.DrawFullScreen(MainMenuScreen);
             GraphicManager.DrawCenteredFit(GameTitle, 0, 20);
         }

@@ -12,7 +12,7 @@ struct VertexShaderOutput
     float2 TexCoord : TEXCOORD0;
 };
 
-float4 Vertex(VertexShaderOutput vertex) : COLOR
+float4 FadeOutEffect(VertexShaderOutput vertex) : COLOR
 {
     float4 texColor = tex2D(TextureSampler, vertex.TexCoord) * BaseColor;
     
@@ -23,8 +23,8 @@ float4 Vertex(VertexShaderOutput vertex) : COLOR
 
 technique Gradient
 {
-    pass P0
+    pass FadeOutEffect
     {
-        PixelShader = compile ps_4_0_level_9_1 Vertex();
+        PixelShader = compile ps_4_0_level_9_1 FadeOutEffect();
     }
 }

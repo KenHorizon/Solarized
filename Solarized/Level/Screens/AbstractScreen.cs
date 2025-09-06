@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Solarized.Level.Container;
 using System.Collections.Generic;
 
@@ -60,12 +61,17 @@ namespace Solarized.Level
         public virtual void Render(GameGraphics gameGraphics)
         {
             this.RenderBackground(gameGraphics);
+            this.RenderButtons(gameGraphics);
+        }
 
+        private void RenderButtons(GameGraphics gameGraphics)
+        {
             foreach (var button in GuisElements)
             {
                 button.Render(gameGraphics);
             }
         }
+
         public virtual void RenderBackground(GameGraphics gameGraphics)
         {
         }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Solarized.Effects;
 using Solarized.Level.Registry;
-using Solarized.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;

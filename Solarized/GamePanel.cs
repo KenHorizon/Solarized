@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using Solarized.Effects;
 using Solarized.Level;
 using Solarized.Level.Registry;
+using Solarized.Level.Sound;
 using Solarized.Screen;
 using System;
 
@@ -13,7 +14,7 @@ namespace Solarized
     public class GamePanel : Game
     {
         private GraphicsDeviceManager deviceManager;
-        public SpriteBatch spriteBatch;
+        public SpriteBatch SpriteBatch;
         public const string GAME_ID = "Solarized";
         public const int OriginalTiles = 16;
         public const int SCALE = 3;
@@ -36,6 +37,7 @@ namespace Solarized
         public SpriteFont Font;
         private GameGraphics GameGraphics;
         MouseState mouse = Mouse.GetState();
+        public RenderTarget2D sceneTarget;
         #region Instances
 
         protected static ContentManager contentManager;
@@ -80,8 +82,9 @@ namespace Solarized
         protected override void LoadContent()
         {
             this.Font = this.Content.Load<SpriteFont>("DefaultFont");
-            this.spriteBatch = new SpriteBatch(GraphicsDevice);
+            this.SpriteBatch = new SpriteBatch(GraphicsDevice);
             this.GameGraphics = new GameGraphics();
+            this.sceneTarget = new RenderTarget2D(GraphicsDevice,this.GetScreenWidth(), this.GetScreenHeight(), false, SurfaceFormat.Color, DepthFormat.None);
             this.SetScreen(new StartupScreen());
 
             // TODO: use this.Content to load your game content here
@@ -92,9 +95,7 @@ namespace Solarized
         }
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-                Keyboard.GetState().IsKeyDown(Keys.Escape))
-                this.Exit();
+            MusicManager.Update();
             this.MouseX = mouse.X;
             this.MouseY = mouse.Y;
             CurrentScreen?.Tick(gameTime);
@@ -114,17 +115,10 @@ namespace Solarized
 
         protected override void Draw(GameTime gameTime)
         {
-            this.GraphicsDevice.Clear(Color.DarkGray);
-            this.spriteBatch.Begin(blendState: BlendState.AlphaBlend);
-            //
-            if (this.GameGraphics != null)
-            {
-                this.GameGraphics.Render(gameTime.ElapsedGameTime.TotalSeconds);
-                CurrentScreen?.Render(this.GameGraphics);
-            }
-            //
-            this.spriteBatch.End();
-
+            this.GraphicsDevice.Clear(Color.Black);
+            this.SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+            CurrentScreen?.Render(this.GameGraphics);
+            this.SpriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);

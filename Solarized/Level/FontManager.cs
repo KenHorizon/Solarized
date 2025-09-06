@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Solarized.Level.Fonts
+namespace Solarized.Level
 {
     public static class FontManager
     {
@@ -26,7 +26,7 @@ namespace Solarized.Level.Fonts
             scales = Math.Min(scale, scale);
             Vector2 position = new Vector2((screenWidth - textSize.X * scale) / 2.0F + x, 
                 (screenHeight - textSize.Y * scale) / 2.0F + y);
-            DrawText(GamePanel.Instance.spriteBatch, font, position, text, color, scale);
+            DrawText(GamePanel.Instance.SpriteBatch, font, position, text, color, scale);
         }
         public static void DrawCenteredFit(int x, int y, string text, Color color, float scale = 1.0F)
         {
@@ -42,8 +42,8 @@ namespace Solarized.Level.Fonts
             Vector2 cursor = position;
             foreach (var part in ParseTextParts(text, color))
             {
-                spriteBatch.DrawString(font, part.Text, cursor + new Vector2(1, 1), Color.Black * 0.75f, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-                spriteBatch.DrawString(font, part.Text, cursor, part.Color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(font, part.Text, cursor + new Vector2(1, 1), Color.Black * 0.75F, 0.0F, Vector2.Zero, scale * 1.1F, SpriteEffects.None, 0.0F);
+                spriteBatch.DrawString(font, part.Text, cursor, part.Color, 0.0F, Vector2.Zero, scale, SpriteEffects.None, 0.0F);
                 cursor.X += font.MeasureString(part.Text).X * scale;
             }
         }
@@ -53,9 +53,9 @@ namespace Solarized.Level.Fonts
         }
         public static void DrawText(Vector2 position, string text, Color color, float scale = 1.0F)
         {
-            DrawText(GamePanel.Instance.spriteBatch, GamePanel.Instance.Font, position, text, color, scale);
+            DrawText(GamePanel.Instance.SpriteBatch, GamePanel.Instance.Font, position, text, color, scale);
         }
-        public static Vector2 MeasureString(SpriteFont font, string text, float scale = 1f)
+        public static Vector2 MeasureString(SpriteFont font, string text, float scale = 1.0F)
         {
             float totalWidth = 0.0F;
             float height = 0.0F;

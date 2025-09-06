@@ -11,7 +11,7 @@ namespace Solarized.Level
         /// </summary>
         public static void DrawFullScreen(ResourceLocation<Texture2D> textures, Color color)
         {
-            SpriteBatch spriteBatch = GamePanel.Instance.spriteBatch;
+            SpriteBatch spriteBatch = GamePanel.Instance.SpriteBatch;
             Rectangle Bounds = new Rectangle(0, 0, GamePanel.Instance.GetScreenWidth(), GamePanel.Instance.GetScreenHeight());
             spriteBatch.Draw(textures.Get(), Bounds, color);
         }
@@ -29,7 +29,7 @@ namespace Solarized.Level
             Texture2D texture = resourceLocation.Get();
             int baseWidth = texture.Width;
             int baseHeight = texture.Height;
-            SpriteBatch spriteBatch = GamePanel.Instance.spriteBatch;
+            SpriteBatch spriteBatch = GamePanel.Instance.SpriteBatch;
             int screenW = GamePanel.Instance.GetScreenWidth();
             int screenH = GamePanel.Instance.GetScreenHeight();
 
@@ -44,7 +44,7 @@ namespace Solarized.Level
 
             // Centered rectangle
             Rectangle drawRect = new Rectangle(
-                ((screenW - drawW) / 2) + x,
+                (screenW - drawW) / 2 ,
                 y,
                 drawW,
                 drawH
@@ -70,7 +70,7 @@ namespace Solarized.Level
         public static void DrawFit(ResourceLocation<Texture2D> resourceLocation, Rectangle targetRect, Color color)
         {
             Texture2D texture = resourceLocation.Get();
-            SpriteBatch spriteBatch = GamePanel.Instance.spriteBatch;
+            SpriteBatch spriteBatch = GamePanel.Instance.SpriteBatch;
             float textureAspect = (float)texture.Width / texture.Height;
             float targetAspect = (float)targetRect.Width / targetRect.Height;
 
@@ -99,7 +99,7 @@ namespace Solarized.Level
         public static void DrawInSlot(ResourceLocation<Texture2D> resourceLocation, Rectangle slotRect, Color color, float padding = 4f)
         {
             Texture2D texture = resourceLocation.Get();
-            SpriteBatch spriteBatch = GamePanel.Instance.spriteBatch;
+            SpriteBatch spriteBatch = GamePanel.Instance.SpriteBatch;
             float maxWidth = slotRect.Width - padding * 2;
             float maxHeight = slotRect.Height - padding * 2;
 
@@ -123,7 +123,7 @@ namespace Solarized.Level
         public static void DrawUIScaled(Vector2 position, ResourceLocation<Texture2D> resourceLocation, float uiScale, Color color)
         {
             Texture2D texture = resourceLocation.Get();
-            SpriteBatch spriteBatch = GamePanel.Instance.spriteBatch;
+            SpriteBatch spriteBatch = GamePanel.Instance.SpriteBatch;
             spriteBatch.Draw(texture, position * uiScale, null, color, 0f, Vector2.Zero, uiScale, SpriteEffects.None, 0f);
         }
     }

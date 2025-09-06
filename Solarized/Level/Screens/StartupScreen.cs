@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Solarized.Level;
-using Solarized.Level.Fonts;
+using Solarized.Level.Sound;
 
 namespace Solarized.Screen
 {
@@ -16,6 +16,11 @@ namespace Solarized.Screen
         {
         }
 
+        public override void Init()
+        {
+            base.Init();
+            SoundManager.Play(SoundID.STARTUP);
+        }
         public override void Tick(GameTime gameTime)
         {
             base.Tick(gameTime);

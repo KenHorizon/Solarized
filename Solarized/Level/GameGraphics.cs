@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Solarized.Level.Registry;
-using Solarized.Utils;
 
 namespace Solarized.Level
 {

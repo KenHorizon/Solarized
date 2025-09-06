@@ -1,4 +1,4 @@
-﻿namespace Solarized.Utils
+﻿namespace Solarized
 {
     public enum GameState
     {
