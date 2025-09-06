@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Solarized.Level.Container;
 using Solarized.Level.Sound;
+using Solarized.Level.Utils;
 using System;
 
 namespace Solarized.Level.Buttons
@@ -60,24 +61,15 @@ namespace Solarized.Level.Buttons
             }
             if (this.IsMouseHovered == true)
             {
-                spriteBatch.End();
-                effect.Parameters["BaseColor"].SetValue(new Vector4(0.0F, 0.0F, 1.0F, 1.0F));
-                effect.Parameters["FadeStart"].SetValue(0.0F);
-                effect.Parameters["FadeEnd"].SetValue(1.0F);
                 Vector2 RectScale = FontManager.MeasureString(this.Text) / 2;
                 int RectX = (int)(this.Position.X - ((int)(this.Width - TextSize.X) / 2));
                 int RectY = (int)this.Position.Y - 6;
-                Rectangle rectangle = new Rectangle(RectX, RectY, this.Width, (int)(this.Height + RectScale.Y));
-
                 Rectangle StartSelected = new Rectangle(RectX, RectY, 10, (int)(this.Height + RectScale.Y));
                 Rectangle EndSelected = new Rectangle(RectX + this.Width, RectY, 10, (int)(this.Height + RectScale.Y));
+                Rectangle rectangle = new Rectangle(RectX, RectY, this.Width, (int)(this.Height + RectScale.Y));
 
-                spriteBatch.Begin(effect: this.effect, blendState: BlendState.AlphaBlend);
-                spriteBatch.Draw(Texture, rectangle, Color.White);
-                
-                spriteBatch.End();
+                ShaderHelpers.FadeOutRectangle(spriteBatch, this.Texture, rectangle, this.effect, Color.LightCyan);
                 spriteBatch.Begin();
-                
                 spriteBatch.Draw(Texture, StartSelected, Color.White);
                 spriteBatch.Draw(Texture, EndSelected, Color.White);
             }
