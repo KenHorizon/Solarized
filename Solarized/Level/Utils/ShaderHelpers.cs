@@ -21,6 +21,7 @@ namespace Solarized.Level.Utils
             float r = ((float) color.R / 255);
             float g = ((float) color.G / 255);
             float b = ((float) color.B / 255);
+            shader.CurrentTechnique = shader.Techniques["FadeOutEffect"];
             shader.Parameters["BaseColor"].SetValue(new Vector4(r, g, b, a));
             shader.Parameters["FadeStart"].SetValue(start);
             shader.Parameters["FadeEnd"].SetValue(end);

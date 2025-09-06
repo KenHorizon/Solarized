@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Solarized.Level.Container;
+using Solarized.Level.Utils;
 using System.Collections.Generic;
 
 namespace Solarized.Level
@@ -23,10 +24,11 @@ namespace Solarized.Level
                 return game;
             }
         }
-        
+        public DynamicRandom Random;
         public AbstractScreen(GamePanel game, string screenTitle = "")
         {
             this.game = game;
+            this.Random = game.Random;
             this.ScreenTitle = screenTitle;
         }
 

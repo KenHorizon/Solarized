@@ -6,6 +6,7 @@ using Solarized.Effects;
 using Solarized.Level;
 using Solarized.Level.Registry;
 using Solarized.Level.Sound;
+using Solarized.Level.Utils;
 using Solarized.Screen;
 using System;
 
@@ -33,7 +34,7 @@ namespace Solarized
         public int MouseY;
         public int gameTick;
         public TimeSpan Time = new TimeSpan();
-        public Random random;
+        public DynamicRandom Random;
         public SpriteFont Font;
         private GameGraphics GameGraphics;
         MouseState mouse = Mouse.GetState();
@@ -60,7 +61,7 @@ namespace Solarized
         //
         public GamePanel()
         {
-            this.random = new Random((int) this.Time.Milliseconds);
+            this.Random = new DynamicRandom((int) this.Time.Milliseconds);
             this.deviceManager = new GraphicsDeviceManager(this);
             this.deviceManager.PreferredBackBufferWidth = ScreenWitdh;
             this.deviceManager.PreferredBackBufferHeight = ScreenHeight;

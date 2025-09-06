@@ -7,14 +7,18 @@ float FadeEnd = 1.0;
 float2 GaussianBlurTex;
 float GaussianBlurRad = 2.0;
 
-struct VertexShaderOutput
+struct FadeOutEffectOutput
 {
     float4 Position : SV_POSITION;
     float4 Color : COLOR0;
     float2 TexCoord : TEXCOORD0;
 };
+struct GaussianBlurEfectOutput
+{
+    float2 TexCoord : TEXCOORD0;
+};
 
-float4 FadeOutEffect(VertexShaderOutput vertex) : COLOR
+float4 FadeOutEffect(FadeOutEffectOutput vertex) : COLOR
 {
     float4 texColor = tex2D(TextureSampler, vertex.TexCoord) * BaseColor;
     
@@ -22,7 +26,7 @@ float4 FadeOutEffect(VertexShaderOutput vertex) : COLOR
     texColor.a *= t;
     return texColor;
 }
-float4 GaussianBlurEfect(VertexShaderOutput vertex) : COLOR
+float4 GaussianBlurEfect(GaussianBlurEfectOutput vertex) : COLOR
 {
     float4 color = float4(0, 0, 0, 0);
     float weights[5] = { 0.204164, 0.304005, 0.193783, 0.072155, 0.016000 };
@@ -30,10 +34,10 @@ float4 GaussianBlurEfect(VertexShaderOutput vertex) : COLOR
 
     for (int i = 0; i < 5; i++)
     {
-        float2 offset = float2(offsets[i], 0) * texelSize * GaussianBlur;
-        color += tex2D(TextureSampler, texCoord + offset) * weights[i];
+        float2 offset = float2(offsets[i], 0) * GaussianBlurTex * GaussianBlurRad;
+        color += tex2D(TextureSampler, vertex.TexCoord + offset) * weights[i];
         if (i > 0)
-            color += tex2D(TextureSampler, texCoord - offset) * weights[i];
+            color += tex2D(TextureSampler, vertex.TexCoord - offset) * weights[i];
     }
 
     return color;
@@ -44,5 +48,9 @@ technique Gradient
     pass FadeOutEffect
     {
         PixelShader = compile ps_4_0_level_9_1 FadeOutEffect();
+    }
+    pass GaussianBlurEfect
+    {
+        PixelShader = compile ps_4_0_level_9_1 GaussianBlurEfect();
     }
 }

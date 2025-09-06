@@ -24,8 +24,8 @@ namespace Solarized.Level
             float scaleY = screenHeight / textSize.Y;
             float scales = Math.Min(scaleX, scaleY);
             scales = Math.Min(scale, scale);
-            Vector2 position = new Vector2((screenWidth - textSize.X * scale) / 2.0F + x, 
-                (screenHeight - textSize.Y * scale) / 2.0F + y);
+            Vector2 position = new Vector2(x + (screenWidth - textSize.X * scale) / 2.0F, y +
+                (screenHeight - textSize.Y * scale) / 2.0F);
             DrawText(GamePanel.Instance.SpriteBatch, font, position, text, color, scale);
         }
         public static void DrawCenteredFit(int x, int y, string text, Color color, float scale = 1.0F)

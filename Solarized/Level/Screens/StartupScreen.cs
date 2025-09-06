@@ -81,6 +81,7 @@ namespace Solarized.Screen
                     GraphicManager.DrawCenteredFit(PresentingLogo, Color.White * MathHelper.Clamp(alphaOut, 0.0F, 1.0F));
                     break;
                 case 3:
+                    float alphaText = (float)(this.timer / 2.0F);
                     string GameTitle = "Solarized: Dawn of Darkness";
                     Vector2 size = FontManager.MeasureString(GameTitle);
                     FontManager.DrawCenteredFit(0, 0, GameTitle, Color.White);
